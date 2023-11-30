@@ -18,8 +18,8 @@ router.post('/add', upload.single('image'), async (req, res) => {
       const plate = new Plate({
         title: req.body.title,
         price:req.body.price,
-        image: req.file.filename, // store the filename in the database
-
+        image: req.file.filename,
+		averageRating:req.body.averageRating,
   
       });
       await plate.save();
@@ -81,6 +81,8 @@ router.put("/update/:id",upload.single('image'),async (req,res)=>{
 			title: req.body.title,
 			price: req.body.price,
 			image: req.file.filename,
+			averageRating:req.body.averageRating,
+
 
 		};	
 		await Plate.findByIdAndUpdate(req.params.id,updatedFields,{new:true});

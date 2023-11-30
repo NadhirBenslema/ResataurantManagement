@@ -16,6 +16,10 @@ const PlateSchema= new mongoose.Schema({
         type: String,
         required: true
     },
+    averageRating:{
+      type: Number,
+      required: true
+  },
 });
 const Plate = mongoose.model("Plate", PlateSchema);
 
