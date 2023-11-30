@@ -38,7 +38,7 @@ const plateRouter=require('./routes/plate');
 const server=http.createServer(app);
 
 
-server.listen(3000,()=>console.log("Server is running..."));
+server.listen(5000,()=>console.log("Server is running..."));
 
 //app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

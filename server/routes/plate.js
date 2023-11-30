@@ -54,22 +54,22 @@ router.get("/:id",async (req, res) => {
 //delete
 router.delete("/:id", async (req, res) => {
 	try {
-	  const plate = await Plate.findById(req.params.id);
+	  const plate = await Plate.findByIdAndDelete(req.params.id);
 	  if (!plate)
 		return res.status(404).send({ message: "Plate not found" });
-  
-	  await plate.remove();
   
 	  res.status(200).send({ message: "Plate deleted successfully" });
 	} catch (error) {
 	  console.log(error);
 	  res.status(500).send({ message: "Internal Server Error" });
 	}
-  }); 
+  });
+  
+  
 
   
-// update
-router.put("/update/:id",async (req,res)=>{
+//update
+router.put("/update/:id",upload.single('image'),async (req,res)=>{
 	
 	try{
 		const { error } = validate(req.body);
@@ -80,6 +80,8 @@ router.put("/update/:id",async (req,res)=>{
 		const updatedFields = {
 			title: req.body.title,
 			price: req.body.price,
+			image: req.file.filename,
+
 		};	
 		await Plate.findByIdAndUpdate(req.params.id,updatedFields,{new:true});
 		res.status(201).send("updated successfully");
@@ -89,6 +91,8 @@ router.put("/update/:id",async (req,res)=>{
 		res.status(500).send({ message: "Internal Server Error" });
 	}
 });
+
+
 
 
   // Filter gyms by rating
