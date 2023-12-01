@@ -40,6 +40,46 @@ router.get("/getAll", async (req, res) => {
     }
 });
 
+router.get('/getSalades', async (req, res) => {
+  
+	try {
+	  const plates = await Plate.find({ category: 'salades' });
+	  res.status(200).send(plates);
+	} catch (err) {
+	  res.status(500).json({ error: err.message });
+	}
+});
+
+router.get('/getFajitas', async (req, res) => {
+  
+	try {
+	  const plates = await Plate.find({ category: 'fajitas' });
+	  res.status(200).send(plates);
+	} catch (err) {
+	  res.status(500).json({ error: err.message });
+	}
+});
+
+
+router.get('/getDesserts', async (req, res) => {
+  
+	try {
+	  const plates = await Plate.find({ category: 'desserts' });
+	  res.status(200).send(plates);
+	} catch (err) {
+	  res.status(500).json({ error: err.message });
+	}
+});
+
+router.get('/getPoulet', async (req, res) => {
+  
+	try {
+	  const plates = await Plate.find({ category: 'poulet' });
+	  res.status(200).send(plates);
+	} catch (err) {
+	  res.status(500).json({ error: err.message });
+	}
+});
 
 //getById
 router.get("/:id",async (req, res) => {
