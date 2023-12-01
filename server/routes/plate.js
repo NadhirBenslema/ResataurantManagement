@@ -20,6 +20,7 @@ router.post('/add', upload.single('image'), async (req, res) => {
         price:req.body.price,
         image: req.file.filename,
 		averageRating:req.body.averageRating,
+		category: req.body.category,
   
       });
       await plate.save();
@@ -82,8 +83,7 @@ router.put("/update/:id",upload.single('image'),async (req,res)=>{
 			price: req.body.price,
 			image: req.file.filename,
 			averageRating:req.body.averageRating,
-
-
+			category: req.body.category,
 		};	
 		await Plate.findByIdAndUpdate(req.params.id,updatedFields,{new:true});
 		res.status(201).send("updated successfully");
@@ -95,9 +95,7 @@ router.put("/update/:id",upload.single('image'),async (req,res)=>{
 });
 
 
-
-
-  // Filter gyms by rating
+  // Filter plates by rating
 router.get('/filter/:rating', async (req, res) => {
 	const rating = req.params.rating;
 	const plates = await Plate.find({ averageRating: { $gte: rating } });
@@ -116,7 +114,6 @@ router.get('/search/:title', async (req, res) => {
 	  res.status(500).send('Server error');
 	}
 });
-
 
 
 module.exports = router;

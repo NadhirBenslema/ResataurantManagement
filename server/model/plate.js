@@ -20,22 +20,32 @@ const PlateSchema= new mongoose.Schema({
       type: Number,
       required: true
   },
+
+  category: {
+    type: String,
+    enum: ['fajitas', 'salades','desserts','poulet'],
+    default: 'fajitas'
+  },
 });
 const Plate = mongoose.model("Plate", PlateSchema);
 
 const validate = (data) => {
 	const schema = Joi.object({
 
-	title: Joi.string().required().messages({
-		'any.required': 'title is required',
-	  }),
+    title: Joi.string().required().messages({
+      'any.required': 'title is required',
+      }),
 
     price: Joi.number().required().messages({
       'any.required': 'price is required',
     }),
     averageRating: Joi.number().required().messages({
         'any.required': 'rating is required',
-      }),
+    }),
+
+    category: Joi.string().required().messages({
+        'any.required': 'category is required',
+    }),
 	 
 	 
 	});
